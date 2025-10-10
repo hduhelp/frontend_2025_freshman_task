@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+
+.page-background {
+  background: radial-gradient(
+    120% 120% at 15% 0%,
+    #e86aaf 0%,
+    #cb64cc 45%,
+    #e76dd3 100%
+  );
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
