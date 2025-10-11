@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2025伪人交互</title>
+    <!-- 引入图标库（修复发送按钮图标） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- 引入外部CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- 网页图标 -->
+    <link rel="icon" href="images/IMG_0243.JPG" type="image/x-icon">
+</head>
+<body>
+    <!-- 顶部渐变装饰 -->
+    <div class="box"></div>
+
+    <!-- Logo -->
+    <img src="images/c590b50dc10ea63c2d3abb82aa4ac01e.jpg" alt="2025伪人交互Logo" class="logo">
+
+    <!-- 主题切换按钮（已补充无障碍属性：title + aria-label） -->
+    <button id="themeSwitch" class="theme-switch" title="切换明暗模式" aria-label="切换明暗模式">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 头部标语 -->
+        <div class="header">
+            <p>探索未至之境</p>
+        </div>
+
+        <!-- 聊天核心容器 -->
+        <div class="chat-container" id="chatContainer">
+            <!-- 统一对话记录容器（替代原replyArea，整合所有消息） -->
+            <div id="chatRecords" class="chat-records">
+                <!-- 初始机器人欢迎消息 -->
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        你好！我是智能助手，很高兴与您对话。请问有什么可以帮助您的吗？
+                        <div class="message-time" id="initTime"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 机器人输入提示（默认隐藏） -->
+            <div class="typing-tip" id="typingTip">
+                <i class="fas fa-circle"></i>
+                <i class="fas fa-circle"></i>
+                <i class="fas fa-circle"></i>
+                机器人正在输入...
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-area">
+                <div class="input-wrap">
+                    <textarea id="msgInput" placeholder="输入您的问题..." rows="1"></textarea>
+                    <!-- 发送按钮（已确认无障碍属性：title + aria-label） -->
+                    <button id="sendBtn" class="send-btn" title="发送消息" aria-label="发送消息">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>© 2024 2025伪人交互. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- 引入外部JS（已修复路径：反斜杠→正斜杠） -->
+    <script src="script/script-1.js"></script>
+</body>
+</html>

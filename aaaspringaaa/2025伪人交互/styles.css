@@ -1,0 +1,401 @@
+/* 全局变量：亮模式默认值 */
+:root {
+    /* 背景色 */
+    --bg-page: #ffffff;
+    --bg-box: linear-gradient(#304bd2, #ffffff);
+    --bg-container: #ffffff;
+    --bg-chat: #ffffff;
+    --bg-bot-msg: #f5f5f5;
+    --bg-user-msg: #e8f3ff;
+    --bg-input-wrap: #ffffff;
+    /* 文字色 */
+    --text-main: #535354;
+    --text-user-msg: #1042e9;
+    --text-placeholder: #999999;
+    --text-time: #bbbbbb;
+    /* 边框色 */
+    --border-chat: #e0e0e0;
+    --border-input: rgba(15, 47, 225, 0.2);
+    /* 按钮样式 */
+    --btn-send-bg: linear-gradient(135deg, #1949f4 0%, #1b36ea 100%);
+    --btn-send-color: #ffffff;
+    --btn-theme-bg: #f5f5f5;
+    --btn-theme-color: #1949f4;
+    /* 过渡效果 */
+    --transition-base: all 0.3s ease;
+}
+
+/* 暗模式变量（覆盖亮模式） */
+body.dark {
+    --bg-page: #121212;
+    --bg-box: linear-gradient(#1a2980, #121212);
+    --bg-container: #1e1e1e;
+    --bg-chat: #1e1e1e;
+    --bg-bot-msg: #2d2d2d;
+    --bg-user-msg: #1a365d;
+    --bg-input-wrap: #2d2d2d;
+    --text-main: #e0e0e0;
+    --text-user-msg: #8ab4f8;
+    --text-placeholder: #666666;
+    --text-time: #555555;
+    --border-chat: #333333;
+    --border-input: rgba(100, 149, 237, 0.3);
+    --btn-theme-bg: #444444;
+    --btn-theme-color: #e0e0e0;
+}
+
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", "Microsoft YaHei", sans-serif;
+}
+
+html {
+    background-color: var(--bg-page);
+    transition: var(--transition-base);
+}
+
+body {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 100px;
+    background-color: var(--bg-page);
+    transition: var(--transition-base);
+}
+
+/* 顶部渐变装饰 */
+.box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: var(--bg-box);
+    z-index: 1;
+    transition: var(--transition-base);
+}
+
+/* Logo样式（整合基础样式+暗夜模式适配） */
+.logo {
+    display: block;
+    width: 320px;
+    height: auto;
+    margin: 0 auto 25px;
+    position: relative;
+    z-index: 2;
+    background: transparent; /* 确保不继承背景色，为滤镜打基础 */
+    transition: var(--transition-base);
+}
+
+/* 暗夜模式：Logo底色与背景一致，保留字体颜色 */
+body.dark .logo {
+    /* 1. 去除原有底色：先转为纯黑（消除彩色底色），再反转成纯白 */
+    filter: brightness(0) invert(1) contrast(1.2); /* contrast微调字体清晰度 */
+    /* 2. 混合模式：白色底色与背景融合，仅保留非白色字体 */
+    mix-blend-mode: multiply;
+}
+
+/* 可选：若上述滤镜效果不理想（如Logo有复杂底色），可替换为伪元素方案
+body.dark .logo {
+    position: relative;
+    z-index: 2;
+}
+body.dark .logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-page); /* 与暗模式背景完全一致 */
+    mix-blend-mode: destination-in; /* 仅保留Logo非透明区域（字体），覆盖底色 */
+    z-index: -1;
+}
+*/
+
+/* 主题切换按钮 */
+.theme-switch {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--btn-theme-bg);
+    color: var(--btn-theme-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    transition: var(--transition-base);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.theme-switch:hover {
+    transform: scale(1.1);
+}
+
+/* 主容器 */
+.container {
+    width: 90%;
+    max-width: 850px;
+    margin: 0 auto 30px;
+    background-color: var(--bg-container);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+    transition: var(--transition-base);
+}
+
+/* 头部标语 */
+.header p {
+    color: var(--text-main);
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: var(--transition-base);
+}
+
+/* 聊天容器 */
+.chat-container {
+    width: 100%;
+    height: 520px;
+    border: 1px solid var(--border-chat);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--bg-chat);
+    transition: var(--transition-base);
+}
+
+/* 对话记录区域 */
+.chat-records {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px;
+    scrollbar-width: thin; /* 优化滚动条（Firefox） */
+}
+
+/* 滚动条美化（Chrome/Safari） */
+.chat-records::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-records::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-records::-webkit-scrollbar-thumb {
+    background-color: var(--border-chat);
+    border-radius: 3px;
+}
+
+/* 消息气泡通用样式 */
+.message {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    max-width: 75%;
+    transition: var(--transition-base);
+}
+
+/* 机器人消息 */
+.bot-message {
+    align-self: flex-start;
+    margin-right: auto;
+}
+.bot-message .message-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--bg-bot-msg);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.bot-message .message-content {
+    background-color: var(--bg-bot-msg);
+    color: var(--text-main);
+    padding: 12px 16px;
+    border-radius: 0 12px 12px 12px;
+}
+
+/* 用户消息 */
+.user-message {
+    align-self: flex-end;
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+.user-message .message-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--bg-user-msg);
+    color: var(--text-user-msg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.user-message .message-content {
+    background-color: var(--bg-user-msg);
+    color: var(--text-user-msg);
+    padding: 12px 16px;
+    border-radius: 12px 0 12px 12px;
+}
+
+/* 消息时间 */
+.message-time {
+    font-size: 12px;
+    color: var(--text-time);
+    margin-top: 6px;
+    text-align: right;
+}
+
+/* 机器人输入提示 */
+.typing-tip {
+    display: none; /* 默认隐藏 */
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    color: var(--text-placeholder);
+    font-size: 14px;
+    margin: 0 18px 18px;
+}
+/* 输入提示动画 */
+.typing-tip i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-placeholder);
+    animation: blink 1.4s infinite ease-in-out;
+}
+.typing-tip i:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.typing-tip i:nth-child(3) {
+    animation-delay: 0.4s;
+}
+@keyframes blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* 输入区域 */
+.input-area {
+    padding: 15px;
+    border-top: 1px solid var(--border-chat);
+    background-color: var(--bg-chat);
+    transition: var(--transition-base);
+}
+.input-wrap {
+    display: flex;
+    gap: 10px;
+    background-color: var(--bg-input-wrap);
+    border: 1px solid var(--border-input);
+    border-radius: 28px;
+    padding: 8px 18px;
+    transition: var(--transition-base);
+}
+/* 输入框聚焦状态 */
+.input-wrap:focus-within {
+    border-color: #22d3ee;
+    box-shadow: 0 0 0 2px rgba(25, 54, 242, 0.2);
+}
+
+/* 新增：暗夜模式输入框白色细边框（核心修改1） */
+body.dark .input-wrap {
+    border: 1px solid #ffffff; /* 1px白色细边框，符合"线一样细"的需求 */
+}
+/* 新增：暗夜模式输入框聚焦状态优化 */
+body.dark .input-wrap:focus-within {
+    border-color: #ffffff; /* 聚焦时保持白色边框 */
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3); /* 轻微白色发光，增强聚焦反馈 */
+}
+
+/* 输入框（核心修改2：同步最大高度为220px，与JS适配） */
+#msgInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    resize: none;
+    min-height: 36px;
+    max-height: 220px; /* 从160px改为220px，与JS配置同步，避免高度截断 */
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--text-main);
+    outline: none;
+    line-height: 1.5;
+    transition: var(--transition-base);
+}
+#msgInput::placeholder {
+    color: var(--text-placeholder);
+    transition: var(--transition-base);
+}
+
+/* 发送按钮 */
+.send-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--btn-send-bg);
+    color: var(--btn-send-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-base);
+    flex-shrink: 0;
+}
+.send-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 12px rgba(14, 83, 202, 0.4);
+}
+.send-btn:active {
+    transform: scale(0.98);
+}
+
+/* 页脚 */
+.footer p {
+    color: var(--text-placeholder);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+    transition: var(--transition-base);
+}
+
+/* 响应式适配（手机端） */
+@media (max-width: 768px) {
+    .logo {
+        width: 240px;
+    }
+    .header p {
+        font-size: 22px;
+    }
+    .chat-container {
+        height: 450px;
+    }
+    .theme-switch {
+        top: 20px;
+        right: 20px;
+        width: 38px;
+        height: 38px;
+    }
+    .message {
+        max-width: 85%;
+    }
+    /* 新增：手机端暗夜模式输入框边框适配 */
+    body.dark .input-wrap {
+        border: 1px solid #ffffff;
+    }
+    /* 新增：手机端输入框最大高度适配 */
+    #msgInput {
+        max-height: 180px; /* 手机端略缩小，避免占用过多屏幕 */
+    }
+}
