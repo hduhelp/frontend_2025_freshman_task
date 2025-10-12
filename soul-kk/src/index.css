@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+
+@theme {
+  /* 字体 */
+  --font-sans: system-ui, sans-serif;
+
+  /* 背景颜色 */
+  --color-bg-dark: #212121;
+  --color-bg-light: #ffffff;
+
+  /* 文字颜色 */
+  --color-text-dark: #ffffff;
+  --color-text-light: #202123;
+  --color-text-secondary: #303030;
+
+  /* 品牌颜色 */
+  --color-brand: #10a37f;
+  --color-brand-hover: #1a7f64;
+
+  /* 边框颜色 */
+  --color-border: #565869;
+
+  /* 圆角 */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+
+  /* 阴影 */
+  --shadow-md: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
