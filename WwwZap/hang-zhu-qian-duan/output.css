@@ -1,0 +1,17 @@
+.user_text{
+    max-width: 60%;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: rgb(37, 159, 236);
+    color: white;
+    margin-left: auto;
+}
+.assistant_text{
+    max-width: 60%;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: rgb(146, 218, 231);
+    color: black;
+}

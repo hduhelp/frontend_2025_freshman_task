@@ -1,0 +1,72 @@
+*{margin: 0; padding: 0; }
+ /*背景图*/ 
+ .bg{ position: relative; 
+    background-image: url("img/banner-background.webp"); 
+    background-size: cover; 
+    background-position: center; 
+    min-height: 100vh; 
+    padding-bottom: 650px;
+} 
+/*ds装饰图*/ 
+.decorate{ 
+    position: absolute; 
+    background-image: url("img/ds提问词.png"); 
+    min-height: 100vh; 
+    width: 468px;
+    height: 61px;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-repeat: no-repeat; 
+} 
+/*聊天区域*/ 
+#chat_area{
+    position: absolute; 
+    overflow-y: auto; 
+    top: 30%;
+    left: 50%; 
+    width: 1500px; 
+    height: 600px; 
+    transform: translateX(-50%); 
+    border: 5px solid rgb(147, 194, 237); 
+    background-color: white; 
+    border-radius: 30px; 
+    font-family: "微软雅黑"; 
+} 
+/*用户操纵区域*/ 
+.operate{ 
+    position: absolute; 
+    left: 50%; 
+    top: calc(30% + 620px);
+    transform: translateX(-50%); 
+    width: 1500px; 
+    height: 200px; 
+    background-color: transparent; 
+    border: 5px solid rgb(147, 194, 237); 
+    border-radius: 30px; 
+    resize: none; 
+} 
+/*输入文本框*/ 
+#input{ 
+    position: absolute; 
+    left: 50%; 
+    transform: translate(-50%); 
+    top: 10px; 
+    box-sizing: border-box; 
+    width: 1495px; 
+    height: 160px; 
+    background-color: transparent; 
+    border: 5px solid transparent; 
+    font-family: "微软雅黑"; 
+    resize: none; 
+}
+/*发送按钮*/ 
+#send{ position: absolute; 
+    top: 95%; 
+    left: 93%; 
+    transform: translate(-50%,-100%); 
+    border-radius: 60px; 
+    width: 60px;
+    height: 40px; 
+    border: 5px solid rgb(159, 207, 237);
+    background-color: white; font-family: "微软雅黑"; }
